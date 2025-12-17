@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "ABOUT US",
+    "subtitle": "Kunal Global Fabtech Private Limited",
+    "description": "Engineering Excellence. Trusted Partnerships. Transforming Industry.",
+    "backgroundImage": "/image59.jpg"
+  },
+  "companyInfo": {
+    "title": "Kunal Global Fabtech Pvt. Ltd.",
+    "subtitle": "A Leading Provider of Engineering Solutions",
+    "description1": "Kunal Global Fabtech Private Limited -A Leading Provider of Engineering Solutions",
+    "description2": "Kunal Global Fabtech Private Limited (having CIN U28990UP2017PTC096711) is a trusted name in the engineering and industrial services sector, offering safe, sustainable, and comprehensive solutions for fabrication, erection, and commissioning works. Headquartered in Kanpur, Uttar Pradesh, Our company is driven by innovation, technical expertise, and a commitment to delivering high-quality results across a range of heavy industries.",
+    "description3": "Established with a clear vision to bring reliability and precision into industrial services, Kunal Global Fabtech has built a strong reputation by offering end-to-end execution capabilities. From the fabrication of complex structural and piping systems to the erection and commissioning of massive industrial setups, our team brings unmatched experience and technical know-how to every project.",
+    "description4": "Our operations are guided by an integrated approach, combining deep domain knowledge with cutting-edge tools and machinery. This enables us to efficiently manage a wide range of activities including tankage construction, equipment erection, ducting, piping, and heavy structural fabrication. With safety, efficiency, and sustainability as our core values, we provide one-stop solutions that exceed client expectations.",
+    "description5": "Over the years, Kunal Global Fabtech has delivered projects for some of the most demanding industrial sectors. Our portfolio includes successful engagements in:",
+    "listItems": [
+      "Thermal Power Plants – delivering structural and mechanical services and supporting critical energy infrastructure.",
+      "Refinery and Petrochemical Plants – offering safe and technically sound erection and piping solutions in high-risk environments.",
+      "Steel Plants (Turbine Works) – executing turbine erection, precision installations, and allied works with precision.",
+      "Solar Plants – contributing to clean energy projects through smart and scalable solutions and services.",
+      "Sugar Industry – supporting sugar manufacturing units with robust mechanical and structural setups."
+    ],
+    "description6": "We take pride in our problem-solving capabilities, especially in the field of erection activity where we have consistently delivered dynamic, tailor-made solutions to meet unique site challenges. Our hands-on experience, combined with a thorough understanding of engineering complexities, allows us to address the evolving demands of our clients and the industries we serve.",
+    "description7": "The company’s commitment to engineering excellence is backed by a dedicated workforce and a leadership team that brings years of field experience and strategic insight. Safety standards and environmental consciousness are integral to every operation we undertake, ensuring that our solutions are not only effective but also responsible and future-ready.",
+    "description8": "As we continue to grow, Kunal Global Fabtech remains focused on quality, customer satisfaction, and continuous improvement. Our goal is to be the preferred partner for industrial clients seeking reliable fabrication and erection solutions backed by technical integrity and timely execution.",
+    "closingText": "We invite you to partner with us and experience engineering that delivers beyond expectations."
+  },
+  "bestThing": {
+    "title": "Best Thing With Us",
+    "description": "Incorporated in 2017 and formerly known as Kunal Engineering, Kunal Global Fabtech Pvt. Ltd. is one of the ever-growing companies in India.",
+    "cards": [
+      {
+        "title": "BEST QUALITY",
+        "icon": "AiOutlineTrophy",
+        "_id": "692f1ade489b08622414da56"
+      },
+      {
+        "title": "BEST SUPPORT",
+        "icon": "MdSupportAgent",
+        "_id": "692f1ade489b08622414da57"
+      },
+      {
+        "title": "BEST RELIABILITY",
+        "icon": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1764695947/construction-cms/file.jpg",
+        "_id": "692f1ade489b08622414da58"
+      }
+    ]
+  },
+  "cta": {
+    "title": "So, What are You Waiting For? Let's Talk About Your Project!",
+    "description": "Get in touch with us, share your aspirations, and watch as together we craft a journey where your dreams truly take flight.",
+    "buttonText": "START YOUR PROJECT"
+  },
+  "_id": "692ee36ecc691d115773e1d6",
+  "stats": [
+    {
+      "value": "100%",
+      "label": "Satisfied Clients",
+      "_id": "692f1ade489b08622414da53"
+    },
+    {
+      "value": "2,000+",
+      "label": "Workforce on projects",
+      "_id": "692f1ade489b08622414da54"
+    },
+    {
+      "value": "70+",
+      "label": "Projects Completed",
+      "_id": "692f1ade489b08622414da55"
+    }
+  ],
+  "createdAt": "2025-12-02T13:02:38.982Z",
+  "updatedAt": "2025-12-04T12:25:01.513Z",
+  "__v": 3
+}

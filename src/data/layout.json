@@ -1,0 +1,28 @@
+{
+  "header": {
+    "logo": "/logo.jpeg",
+    "brandName": "KUNAL",
+    "phone": "+91 8200 417 508",
+    "quoteButtonText": "GET A QUOTE"
+  },
+  "footer": {
+    "contactInfo": {
+      "phone1": "+91 82004 17508",
+      "phone2": "0512-3154971",
+      "email": "info@kunalfabtech.com",
+      "socialHandle": "@kunalfabtech"
+    },
+    "logo": "/logo.jpeg",
+    "brandName": "KUNAL",
+    "companyName": "Kunal Global Fabtech Pvt. Ltd.",
+    "address": "Araji 74, Plot No. 4, Hasanpur, Maswanpur, Kalyanpur, Kanpur, U.P. – 208019",
+    "mailLoginText": "Mail Login",
+    "copyrightText": "© 2025-26 Kunal Global Fabtech Pvt. Ltd. – All rights reserved.",
+    "designedByText": "Avyukt Core Technology",
+    "designedByLink": "#"
+  },
+  "_id": "69306184482d2648fdc2ebbb",
+  "createdAt": "2025-12-03T16:12:52.427Z",
+  "updatedAt": "2025-12-11T07:56:20.629Z",
+  "__v": 0
+}
