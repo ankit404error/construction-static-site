@@ -2,16 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Trophy, Headset, ShieldCheck, ChevronRight, Award, Users, Target, Image, Edit3 } from 'lucide-react';
 import api from '../services/api';
-// Auth and Edit imports removed
+import { useAuth } from '../context/AuthContext';
+import EditModal from './EditModal';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import CountUp from './CountUp';
 
 const About = () => {
-  // Auth hooks removed
   const [aboutData, setAboutData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editingSection, setEditingSection] = useState(null);
+  const [modalData, setModalData] = useState(null);
+
+  const { isAdmin, token } = useAuth();
 
   const fetchAboutData = async () => {
     try {
@@ -29,7 +34,99 @@ const About = () => {
     fetchAboutData();
   }, []);
 
-  // handleEdit and handleSave removed
+  const handleEdit = (section) => {
+    setEditingSection(section);
+    let initialData = {};
+    let fields = [];
+
+    if (section === 'hero') {
+      initialData = { ...aboutData.hero };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'subtitle', label: 'Subtitle', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'backgroundImage', label: 'Background Image URL', type: 'image' }
+      ];
+    } else if (section === 'companyInfo') {
+      initialData = { ...aboutData.companyInfo };
+      if (initialData.listItems && Array.isArray(initialData.listItems)) {
+        initialData.listItems = initialData.listItems.map(item => ({ text: item }));
+      }
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'subtitle', label: 'Subtitle', type: 'text' },
+        { name: 'description1', label: 'Description 1', type: 'textarea' },
+        { name: 'description2', label: 'Description 2', type: 'textarea' },
+        { name: 'description3', label: 'Description 3', type: 'textarea' },
+        { name: 'description4', label: 'Description 4', type: 'textarea' },
+        { name: 'listItems', label: 'List Items', type: 'array', subFields: [{ name: 'text', placeholder: 'List Item' }] },
+        /* Supporting more descriptions as per original schema */
+        { name: 'closingText', label: 'Closing Text', type: 'textarea' }
+      ];
+    } else if (section === 'stats') {
+      initialData = { stats: aboutData.stats };
+      fields = [
+        {
+          name: 'stats',
+          label: 'Statistics',
+          type: 'array',
+          subFields: [
+            { name: 'value', placeholder: 'Value (e.g. 100%)' },
+            { name: 'label', placeholder: 'Label (e.g. Satisfied Clients)' }
+          ]
+        }
+      ];
+    } else if (section === 'bestThing') {
+      initialData = { ...aboutData.bestThing };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        {
+          name: 'cards',
+          label: 'Feature Cards',
+          type: 'array',
+          subFields: [
+            { name: 'title', placeholder: 'Title' },
+            { name: 'icon', placeholder: 'Icon (Trophy, Headset, ShieldCheck)' }
+          ]
+        }
+      ];
+    } else if (section === 'cta') {
+      initialData = { ...aboutData.cta };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'buttonText', label: 'Button Text', type: 'text' }
+      ];
+    }
+
+    setModalData({ title: `Edit ${section}`, fields, initialData });
+  };
+
+  const handleSave = async (updatedData) => {
+    try {
+      let updatePayload;
+      let dataToSave = { ...updatedData };
+
+      if (editingSection === 'companyInfo' && dataToSave.listItems) {
+        dataToSave.listItems = dataToSave.listItems.map(item => item.text);
+      }
+
+      if (editingSection === 'stats' && dataToSave.stats) {
+        updatePayload = dataToSave;
+      } else {
+        updatePayload = { [editingSection]: dataToSave };
+      }
+
+      await api.updateAboutPageData(updatePayload, token);
+      await fetchAboutData();
+      setEditingSection(null);
+      setModalData(null);
+    } catch (err) {
+      console.error('Error updating data:', err);
+      alert('Failed to update content.');
+    }
+  };
 
   // Icon mapping helper with updated Lucide icons
   const getIcon = (iconName) => {
@@ -58,7 +155,17 @@ const About = () => {
   return (
     <main className="min-h-screen bg-background relative">
       {/* Admin Controls */}
-      {/* Admin Controls removed */}
+      {isAdmin && (
+        <div className="fixed top-24 left-4 z-50">
+           <Button 
+             variant={editMode ? "destructive" : "secondary"}
+             className="shadow-xl"
+             onClick={() => setEditMode(!editMode)}
+           >
+             {editMode ? "Exit Edit Mode" : "Enable Edit Mode"}
+           </Button>
+        </div>
+      )}
 
       {/* --- HERO SECTION --- */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
@@ -92,7 +199,13 @@ const About = () => {
                {hero.description}
              </p>
 
-             {/* Edit button removed */}
+             {editMode && (
+              <div className="mt-8">
+                <Button size="sm" onClick={() => handleEdit('hero')} variant="secondary">
+                  <Edit3 className="w-4 h-4 mr-2" /> Edit Hero
+                </Button>
+              </div>
+             )}
            </div>
         </div>
       </section>
@@ -107,7 +220,11 @@ const About = () => {
                    <h2 className="text-3xl md:text-4xl font-heading font-bold mb-2">{companyInfo.title}</h2>
                    <div className="h-1 w-20 bg-primary rounded-full"></div>
                 </div>
-                {/* Edit button removed */}
+                {editMode && (
+                  <Button size="sm" variant="outline" onClick={() => handleEdit('companyInfo')}>
+                    <Edit3 className="w-4 h-4 mr-2" /> Edit Info
+                  </Button>
+                )}
               </div>
               
               <div className="prose prose-lg text-muted-foreground max-w-none w-full">
@@ -144,7 +261,13 @@ const About = () => {
       {/* --- STATS --- */}
       <section className="py-24 bg-slate-50 border-b border-border/50 relative">
         <div className="container mx-auto px-4 relative z-10">
-           {/* Edit stats removed */}
+           {editMode && (
+              <div className="absolute top-4 right-4 z-20">
+                <Button size="sm" variant="outline" className="text-navy bg-white border-none shadow-sm" onClick={() => handleEdit('stats')}>
+                  <Edit3 className="w-4 h-4 mr-2" /> Edit Stats
+                </Button>
+              </div>
+           )}
            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 relative items-center justify-items-center">
               {stats.slice(0, 3).map((stat, idx) => (
                 <div key={idx} className="text-center w-full max-w-[250px]">
@@ -165,6 +288,13 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">{bestThing.title}</h2>
               <p className="text-muted-foreground text-lg">{bestThing.description}</p>
               
+              {editMode && (
+                <div className="absolute top-0 right-0">
+                  <Button size="sm" variant="ghost" onClick={() => handleEdit('bestThing')}>
+                    <Edit3 className="w-4 h-4" />
+                  </Button>
+                </div>
+              )}
            </div>
 
            <div className="grid md:grid-cols-3 gap-8">
@@ -221,8 +351,24 @@ const About = () => {
               <Link to="/contact">{cta.buttonText}</Link>
             </Button>
 
+            {editMode && (
+              <div className="absolute top-4 right-4">
+                <Button size="sm" variant="secondary" onClick={() => handleEdit('cta')}>
+                  <Edit3 className="w-4 h-4 mr-2" /> Edit CTA
+                </Button>
+              </div>
+            )}
          </div>
       </section>
+
+      <EditModal
+        isOpen={!!editingSection}
+        onClose={() => { setEditingSection(null); setModalData(null); }}
+        onSave={handleSave}
+        title={modalData?.title}
+        fields={modalData?.fields || []}
+        initialData={modalData?.initialData}
+      />
     </main>
   );
 };

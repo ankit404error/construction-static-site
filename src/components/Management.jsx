@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Edit3, Linkedin, Mail } from 'lucide-react';
 import api from '../services/api';
-// Auth and Edit imports removed
+import { useAuth } from '../context/AuthContext';
+import EditModal from './EditModal';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -21,10 +22,14 @@ const TeamMemberImage = ({ src, alt, size = "w-48 h-48" }) => {
 };
 
 const Management = () => {
-  // Auth hooks removed
   const [managementData, setManagementData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editingSection, setEditingSection] = useState(null);
+  const [modalData, setModalData] = useState(null);
+
+  const { isAdmin, token } = useAuth();
 
   const fetchManagementData = async () => {
     try {
@@ -42,7 +47,69 @@ const Management = () => {
     fetchManagementData();
   }, []);
 
-  // handleEdit and handleSave removed
+  const handleEdit = (section) => {
+    setEditingSection(section);
+    let initialData = {};
+    let fields = [];
+
+    if (section === 'managementTeam') {
+      initialData = { managementTeam: managementData.managementTeam };
+      fields = [
+        {
+          name: 'managementTeam',
+          label: 'Management Team',
+          type: 'array',
+          subFields: [
+            { name: 'name', placeholder: 'Name' },
+            { name: 'title', placeholder: 'Title' },
+            { name: 'img', placeholder: 'Image URL', type: 'image' }
+          ]
+        }
+      ];
+    } else if (section === 'leadershipTeam') {
+      initialData = { leadershipTeam: managementData.leadershipTeam };
+      fields = [
+        {
+          name: 'leadershipTeam',
+          label: 'Leadership Team',
+          type: 'array',
+          subFields: [
+            { name: 'name', placeholder: 'Name' },
+            { name: 'title', placeholder: 'Title' },
+            { name: 'img', placeholder: 'Image URL', type: 'image' }
+          ]
+        }
+      ];
+    } else if (section === 'cta') {
+      initialData = { ...managementData.cta };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'buttonText', label: 'Button Text', type: 'text' }
+      ];
+    }
+
+    setModalData({ title: `Edit ${section.charAt(0).toUpperCase() + section.slice(1)}`, fields, initialData });
+  };
+
+  const handleSave = async (updatedData) => {
+    try {
+      let updatePayload = {
+        [editingSection]: updatedData
+      };
+      if (editingSection === 'managementTeam' || editingSection === 'leadershipTeam') {
+        updatePayload = updatedData;
+      }
+      
+      await api.updateManagementPageData(updatePayload, token);
+      await fetchManagementData();
+      setEditingSection(null);
+      setModalData(null);
+    } catch (err) {
+      console.error('Error updating data:', err);
+      alert('Failed to update content.');
+    }
+  };
 
   if (loading) return (
     <div className="flex justify-center items-center min-h-screen">
@@ -59,7 +126,13 @@ const Management = () => {
     <main className="min-h-screen bg-background pt-24 pb-16">
       
       {/* ADMIN CONTROLS */}
-      {/* ADMIN CONTROLS removed */}
+      {isAdmin && (
+        <div className="fixed top-24 left-4 z-50 flex gap-2">
+           <Button variant={editMode ? "destructive" : "secondary"} onClick={() => setEditMode(!editMode)} className="shadow-xl">
+              {editMode ? "Exit Edit Mode" : "Enable Edit Mode"}
+           </Button>
+        </div>
+      )}
 
       <div className="container mx-auto px-4">
         
@@ -76,7 +149,13 @@ const Management = () => {
 
         {/* Management Team */}
         <section className="mb-24 relative">
-           {/* Edit button removed */}
+           {editMode && (
+              <div className="flex justify-end mb-4">
+                <Button onClick={() => handleEdit('managementTeam')} className="shadow-lg">
+                   <Edit3 className="w-4 h-4 mr-2" /> Edit Management
+                </Button>
+              </div>
+           )}
            
            <h2 className="text-2xl md:text-3xl font-heading font-bold text-center mb-12 flex items-center justify-center gap-4">
              <span className="h-px w-12 bg-border"></span>
@@ -97,7 +176,13 @@ const Management = () => {
 
         {/* Leadership Team */}
         <section className="mb-24 relative">
-           {/* Edit button removed */}
+           {editMode && (
+              <div className="flex justify-end mb-4">
+                <Button onClick={() => handleEdit('leadershipTeam')} className="shadow-lg">
+                   <Edit3 className="w-4 h-4 mr-2" /> Edit Leadership
+                </Button>
+              </div>
+           )}
 
            <h2 className="text-2xl md:text-3xl font-heading font-bold text-center mb-12 flex items-center justify-center gap-4">
              <span className="h-px w-12 bg-border"></span>
@@ -137,7 +222,13 @@ const Management = () => {
            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 8V16M8 12H16' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")` }}></div>
            
            <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-               {/* Edit CTA removed */}
+              {editMode && (
+                 <div className="absolute top-4 right-4">
+                    <Button variant="secondary" size="sm" onClick={() => handleEdit('cta')}>
+                       <Edit3 className="w-4 h-4 mr-2" /> Edit CTA
+                    </Button>
+                 </div>
+              )}
               
               <h2 className="text-3xl font-heading font-bold text-white">
                 {cta.title}
@@ -153,7 +244,14 @@ const Management = () => {
 
       </div>
 
-      {/* EditModal removed */}
+      <EditModal
+        isOpen={!!editingSection}
+        onClose={() => { setEditingSection(null); setModalData(null); }}
+        onSave={handleSave}
+        title={modalData?.title}
+        fields={modalData?.fields || []}
+        initialData={modalData?.initialData}
+      />
     </main>
   );
 };

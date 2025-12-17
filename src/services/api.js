@@ -1,89 +1,210 @@
-// Static Data Imports
-import homepageData from '../data/homepage.json';
-import aboutpageData from '../data/aboutpage.json';
-import missionpageData from '../data/missionpage.json';
-import managementpageData from '../data/managementpage.json';
-import gallerypageData from '../data/gallerypage.json';
-import servicepageData from '../data/servicepage.json';
-import projectpageData from '../data/projectpage.json';
-import resourcespageData from '../data/resourcespage.json';
-import workforcepageData from '../data/workforcepage.json';
-import layoutData from '../data/layout.json';
-import ehspageData from '../data/ehspage.json';
-import certificatepageData from '../data/certificatepage.json';
-import contactpageData from '../data/contactpage.json';
-import careerpageData from '../data/careerpage.json';
+import staticData from '../data/staticData.json';
 
-// Helper to simulate async behavior for compatibility
-const resolveData = (data) => Promise.resolve(data);
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+// Helper to simulate async delay
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const api = {
-    // Authentication (Disabled for static site)
-    login: async () => {
-        throw new Error('Login is disabled in static mode.');
+    // Authentication - Mock implementation
+    login: async (username, password) => {
+        await delay(500); // Simulate network request
+        // Accept any credentials for static version or specific hardcoded ones?
+        // Let's accept 'admin'/'admin' or just return success to be safe.
+        // Actually, let's keep it simple: always succeed for now to allow viewing admin UI.
+        return {
+            token: 'static-mock-token',
+            user: { username: username || 'admin', role: 'admin' },
+             message: 'Login successful (Static Mode)'
+        };
     },
-    verifyToken: async () => {
-        return false; // Always invalid
+
+    verifyToken: async (token) => {
+        // Always valid in static mode
+        return { valid: true };
     },
 
     // Home Page
-    getHomePageData: () => resolveData(homepageData),
-    updateHomePageData: () => Promise.reject('Updates disabled'),
+    getHomePageData: async () => {
+        await delay(200);
+        return staticData.homepage;
+    },
+
+    updateHomePageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+        // In a real static site generator, we can't save. 
+        // We just return success to satisfy the UI.
+    },
 
     // About Page API
-    getAboutPageData: () => resolveData(aboutpageData),
-    updateAboutPageData: () => Promise.reject('Updates disabled'),
+    getAboutPageData: async () => {
+        await delay(200);
+        return staticData.aboutpage;
+    },
+
+    updateAboutPageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Mission Page API
-    getMissionPageData: () => resolveData(missionpageData),
-    updateMissionPageData: () => Promise.reject('Updates disabled'),
+    getMissionPageData: async () => {
+        await delay(200);
+        return staticData.missionpage;
+    },
+
+    updateMissionPageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Management Page API
-    getManagementPageData: () => resolveData(managementpageData),
-    updateManagementPageData: () => Promise.reject('Updates disabled'),
+    getManagementPageData: async () => {
+        await delay(200);
+        return staticData.managementpage;
+    },
+
+    updateManagementPageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Gallery Page API
-    getGalleryPageData: () => resolveData(gallerypageData),
-    updateGalleryPageData: () => Promise.reject('Updates disabled'),
+    getGalleryPageData: async () => {
+        await delay(200);
+        return staticData.gallerypage;
+    },
+
+    updateGalleryPageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Service Page API
-    getServicePageData: () => resolveData(servicepageData),
-    updateServicePageData: () => Promise.reject('Updates disabled'),
+    getServicePageData: async () => {
+        await delay(200);
+        return staticData.servicepage;
+    },
+
+    updateServicePageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Project Page API
-    getProjectPageData: () => resolveData(projectpageData),
-    updateProjectPageData: () => Promise.reject('Updates disabled'),
+    getProjectPageData: async () => {
+        await delay(200);
+        return staticData.projectpage;
+    },
+
+    updateProjectPageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Resources Page
-    getResourcesPageData: () => resolveData(resourcespageData),
-    updateResourcesPageData: () => Promise.reject('Updates disabled'),
+    getResourcesPageData: async () => {
+        await delay(200);
+        return staticData.resourcespage;
+    },
+
+    updateResourcesPageData: async (data, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: data };
+    },
 
     // Workforce Page
-    getWorkforcePageData: () => resolveData(workforcepageData),
-    updateWorkforcePageData: () => Promise.reject('Updates disabled'),
+    getWorkforcePageData: async () => {
+        await delay(200);
+        return staticData.workforcepage;
+    },
 
-    // Image Upload (Disabled)
-    uploadImage: () => Promise.reject('Uploads disabled'),
+    updateWorkforcePageData: async (data, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: data };
+    },
+
+    // Image Upload
+    uploadImage: async (file, token) => {
+        await delay(500);
+        console.warn('Upload ignored: Application is in static mode.');
+        // Return a fake URL or the original object URL to simulate upload
+        return { 
+            success: true, 
+            url: URL.createObjectURL(file), // This will work for the session
+            message: 'Image "uploaded" (Static Mode - not persisted)' 
+        };
+    },
 
     // Layout (Header/Footer)
-    getLayoutData: () => resolveData(layoutData),
-    updateLayoutData: () => Promise.reject('Updates disabled'),
+    getLayoutData: async () => {
+        await delay(200);
+        return staticData.layout;
+    },
+
+    updateLayoutData: async (data, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: data };
+    },
 
     // EHS Page API
-    getEHSPageData: () => resolveData(ehspageData),
-    updateEHSPageData: () => Promise.reject('Updates disabled'),
+    getEHSPageData: async () => {
+        await delay(200);
+        return staticData.ehspage;
+    },
+
+    updateEHSPageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Certificate Page API
-    getCertificatePageData: () => resolveData(certificatepageData),
-    updateCertificatePageData: () => Promise.reject('Updates disabled'),
+    getCertificatePageData: async () => {
+        await delay(200);
+        return staticData.certificatepage;
+    },
+
+    updateCertificatePageData: async (updateData, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: updateData };
+    },
 
     // Contact Page API
-    getContactPageData: () => resolveData(contactpageData),
-    updateContactPageData: () => Promise.reject('Updates disabled'),
+    getContactPageData: async () => {
+        await delay(200);
+        return staticData.contactpage;
+    },
+
+    updateContactPageData: async (data, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: data };
+    },
 
     // Career Page API
-    getCareerPageData: () => resolveData(careerpageData),
-    updateCareerPageData: () => Promise.reject('Updates disabled')
+    getCareerPageData: async () => {
+        await delay(200);
+        return staticData.careerpage;
+    },
+
+    updateCareerPageData: async (data, token) => {
+        await delay(500);
+        console.warn('Update ignored: Application is in static mode.');
+        return { success: true, data: data };
+    }
 };
 
 export default api;

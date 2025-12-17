@@ -19,7 +19,8 @@ import Career from './components/Career';
 import Quote from './components/Quote';
 import Workforce from './components/Workforce';
 import Feedback from './components/Feedback';
-// AuthContext removed
+import AdminLogin from './components/AdminLogin';
+import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
   const location = useLocation();
@@ -29,30 +30,33 @@ const App = () => {
   }, [location.pathname]);
 
   return (
-    <div className="app-root min-h-screen flex flex-col">
-      <Navbar />
-      <div className="flex-1 app-content pt-20 pb-32">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/mission" element={<Mission />} />
-          <Route path="/management" element={<Management />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/ehs" element={<EHS />} />
-          <Route path="/certificates" element={<Certificates />} />
-          <Route path="/projects" element={<Project />} />
-          <Route path="/services" element={<Service />} />
-          <Route path="/plant" element={<Plant />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/career" element={<Career />} />
-          <Route path="/quote" element={<Quote />} />
-          <Route path="/workforce" element={<Workforce />} />
-          <Route path="/feedback" element={<Feedback />} />
-        </Routes>
+    <AuthProvider>
+      <div className="app-root min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1 app-content pt-20 pb-32">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/mission" element={<Mission />} />
+            <Route path="/management" element={<Management />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/ehs" element={<EHS />} />
+            <Route path="/certificates" element={<Certificates />} />
+            <Route path="/projects" element={<Project />} />
+            <Route path="/services" element={<Service />} />
+            <Route path="/plant" element={<Plant />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/quote" element={<Quote />} />
+            <Route path="/workforce" element={<Workforce />} />
+            <Route path="/feedback" element={<Feedback />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </AuthProvider>
   );
 };
 

@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Edit3, ZoomIn, X } from 'lucide-react';
 import api from '../services/api';
-// Auth and Edit imports removed
+import { useAuth } from '../context/AuthContext';
+import EditModal from './EditModal';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Gallery = () => {
-  // Auth hooks removed
   const [galleryData, setGalleryData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editingSection, setEditingSection] = useState(null);
+  const [modalData, setModalData] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const { isAdmin, token } = useAuth();
 
   const fetchGalleryData = async () => {
     try {
@@ -27,7 +33,39 @@ const Gallery = () => {
     fetchGalleryData();
   }, []);
 
-  // handleEdit and handleSave removed
+  const handleEdit = () => {
+    setEditingSection('images');
+    const initialData = { images: galleryData.images };
+    const fields = [
+      {
+        name: 'images',
+        label: 'Gallery Images',
+        type: 'array',
+        subFields: [
+          { name: 'text', placeholder: 'Image URL', type: 'image' }
+        ]
+      }
+    ];
+
+    const transformedInitialData = {
+      images: initialData.images.map(img => ({ text: img }))
+    };
+
+    setModalData({ title: 'Edit Gallery Images', fields, initialData: transformedInitialData });
+  };
+
+  const handleSave = async (updatedData) => {
+    try {
+      const images = updatedData.images.map(item => item.text);
+      await api.updateGalleryPageData({ images }, token);
+      await fetchGalleryData();
+      setEditingSection(null);
+      setModalData(null);
+    } catch (err) {
+      console.error('Error updating data:', err);
+      alert('Failed to update content.');
+    }
+  };
 
   if (loading) return (
     <div className="flex justify-center items-center min-h-screen">
@@ -44,7 +82,13 @@ const Gallery = () => {
     <main className="min-h-screen bg-background pt-24 pb-16">
       
       {/* ADMIN CONTROLS */}
-      {/* ADMIN CONTROLS removed */}
+      {isAdmin && (
+        <div className="fixed top-24 left-4 z-50 flex gap-2">
+           <Button variant={editMode ? "destructive" : "secondary"} onClick={() => setEditMode(!editMode)} className="shadow-xl">
+              {editMode ? "Exit Edit Mode" : "Enable Edit Mode"}
+           </Button>
+        </div>
+      )}
 
       <div className="container mx-auto px-4">
         
@@ -58,7 +102,13 @@ const Gallery = () => {
              A glimpse into our projects, site operations, and engineering excellence.
            </p>
            
-           {/* Edit button removed */}
+           {editMode && (
+              <div className="absolute top-0 right-0">
+                 <Button onClick={handleEdit} className="shadow-lg">
+                    <Edit3 className="w-4 h-4 mr-2" /> Manage Gallery
+                 </Button>
+              </div>
+           )}
         </div>
 
         {/* Masonry-like Grid */}
@@ -98,7 +148,14 @@ const Gallery = () => {
 
       </div>
 
-      {/* EditModal removed */}
+      <EditModal
+        isOpen={!!editingSection}
+        onClose={() => { setEditingSection(null); setModalData(null); }}
+        onSave={handleSave}
+        title={modalData?.title}
+        fields={modalData?.fields || []}
+        initialData={modalData?.initialData}
+      />
     </main>
   );
 };

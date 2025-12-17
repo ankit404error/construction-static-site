@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Target, Eye, ArrowRight, CheckCircle2, Edit3 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
-// Auth and Edit imports removed
+import { useAuth } from '../context/AuthContext';
+import EditModal from './EditModal';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Mission = () => {
-  // Auth hooks removed
   const [missionData, setMissionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editingSection, setEditingSection] = useState(null);
+  const [modalData, setModalData] = useState(null);
+
+  const { isAdmin, token } = useAuth();
 
   const fetchMissionData = async () => {
     try {
@@ -28,7 +33,67 @@ const Mission = () => {
     fetchMissionData();
   }, []);
 
-  // handleEdit and handleSave removed
+  const handleEdit = (section) => {
+    setEditingSection(section);
+    let initialData = {};
+    let fields = [];
+
+    if (section === 'hero') {
+      initialData = { ...missionData.hero };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'subtitle', label: 'Subtitle', type: 'text' },
+        { name: 'backgroundImage', label: 'Background Image URL', type: 'image' }
+      ];
+    } else if (section === 'vision') {
+      initialData = { ...missionData.vision };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'image', label: 'Image URL', type: 'image' }
+      ];
+    } else if (section === 'mission') {
+      initialData = { ...missionData.mission };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'image', label: 'Image URL', type: 'image' },
+        {
+          name: 'listItems',
+          label: 'Mission Points',
+          type: 'array',
+          subFields: [
+            { name: 'title', placeholder: 'Point Title' },
+            { name: 'description', placeholder: 'Description', type: 'textarea' }
+          ]
+        }
+      ];
+    } else if (section === 'cta') {
+      initialData = { ...missionData.cta };
+      fields = [
+        { name: 'title', label: 'Title', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea' },
+        { name: 'buttonText', label: 'Button Text', type: 'text' }
+      ];
+    }
+
+    setModalData({ title: `Edit ${section.charAt(0).toUpperCase() + section.slice(1)}`, fields, initialData });
+  };
+
+  const handleSave = async (updatedData) => {
+    try {
+      let updatePayload = {
+        [editingSection]: updatedData
+      };
+      await api.updateMissionPageData(updatePayload, token);
+      await fetchMissionData();
+      setEditingSection(null);
+      setModalData(null);
+    } catch (err) {
+      console.error('Error updating data:', err);
+      alert('Failed to update content.');
+    }
+  };
 
   if (loading) return (
     <div className="flex justify-center items-center min-h-screen">
@@ -45,13 +110,25 @@ const Mission = () => {
     <main className="min-h-screen bg-background pt-24 pb-16">
       
       {/* ADMIN CONTROLS */}
-      {/* ADMIN CONTROLS removed */}
+      {isAdmin && (
+        <div className="fixed top-24 left-4 z-50 flex gap-2">
+           <Button variant={editMode ? "destructive" : "secondary"} onClick={() => setEditMode(!editMode)} className="shadow-xl">
+              {editMode ? "Exit Edit Mode" : "Enable Edit Mode"}
+           </Button>
+        </div>
+      )}
 
       <div className="container mx-auto px-4">
         
         {/* Header/Hero Section */}
         <div className="text-center mb-20 animate-fade-in relative">
-           {/* Edit button removed */}
+           {editMode && (
+              <div className="absolute top-0 right-0">
+                 <Button size="sm" variant="ghost" onClick={() => handleEdit('hero')}>
+                    <Edit3 className="w-4 h-4 ml-2" />
+                 </Button>
+              </div>
+           )}
            <div className="inline-block px-4 py-1 border border-primary/20 rounded-full bg-primary/5 text-primary text-sm font-medium mb-4">
               OUR DRIVING FORCE
            </div>
@@ -65,7 +142,11 @@ const Mission = () => {
         <section className="mb-32">
            <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="relative group">
-                 {/* Edit button removed */}
+                 {editMode && (
+                   <Button size="icon" className="absolute top-4 right-4 z-10" onClick={() => handleEdit('vision')}>
+                     <Edit3 className="w-4 h-4" />
+                   </Button>
+                 )}
                  <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px]">
                     <img 
                       src={vision.image} 
@@ -97,7 +178,11 @@ const Mission = () => {
         <section className="mb-32">
            <div className="grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse">
               <div className="md:order-2 relative group">
-                 {/* Edit button removed */}
+                 {editMode && (
+                   <Button size="icon" className="absolute top-4 right-4 z-10" onClick={() => handleEdit('mission')}>
+                     <Edit3 className="w-4 h-4" />
+                   </Button>
+                 )}
                  <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[400px]">
                     <img 
                       src={mission.image} 
@@ -143,7 +228,13 @@ const Mission = () => {
            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 8V16M8 12H16' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")` }}></div>
            
            <div className="relative z-10 max-w-3xl mx-auto space-y-8">
-               {/* Edit CTA removed */}
+              {editMode && (
+                 <div className="absolute top-0 right-0">
+                    <Button variant="secondary" size="sm" onClick={() => handleEdit('cta')}>
+                       <Edit3 className="w-4 h-4 mr-2" /> Edit CTA
+                    </Button>
+                 </div>
+              )}
               
               <h2 className="text-3xl md:text-5xl font-heading font-bold">
                 {cta.title}
@@ -159,7 +250,14 @@ const Mission = () => {
 
       </div>
 
-      {/* EditModal removed */}
+      <EditModal
+        isOpen={!!editingSection}
+        onClose={() => { setEditingSection(null); setModalData(null); }}
+        onSave={handleSave}
+        title={modalData?.title}
+        fields={modalData?.fields || []}
+        initialData={modalData?.initialData}
+      />
     </main>
   );
 };

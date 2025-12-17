@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// Auth and Edit imports removed
+import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
+import EditModal from './EditModal';
 import CountUp from './CountUp'; // Keeping original countup or can switch to shadcn/react-spring one
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight, Zap, Sun, Wind, Droplet, Layers, Users, TrendingUp, Award, Edit3 } from 'lucide-react';
 
 const Home = () => {
-  // Auth hooks removed
+  const { isAdmin, token, logout } = useAuth();
   const [homeData, setHomeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [editingSection, setEditingSection] = useState(null);
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     fetchHomeData();
@@ -29,7 +34,28 @@ const Home = () => {
     }
   };
 
-  // handleEdit and handleSave removed
+  const handleEdit = (section, data, fields) => {
+    setEditingSection(section);
+    setModalData({ data, fields });
+  };
+
+  const handleSave = async (updatedData) => {
+    try {
+      let updatePayload;
+      if (editingSection === 'stats' && updatedData.stats) {
+        updatePayload = updatedData;
+      } else {
+        updatePayload = { [editingSection]: updatedData };
+      }
+      await api.updateHomePageData(updatePayload, token);
+      await fetchHomeData();
+      setEditingSection(null);
+      setModalData(null);
+    } catch (err) {
+      console.error('Error updating data:', err);
+      alert('Failed to update content.');
+    }
+  };
 
   if (loading) return (
     <div className="flex justify-center items-center min-h-screen bg-background">
@@ -46,7 +72,17 @@ const Home = () => {
     <main className="min-h-screen bg-background relative overflow-hidden">
       
       {/* Admin Quick Controls */}
-      {/* Admin Quick Controls removed */}
+      {isAdmin && (
+        <div className="fixed top-24 left-4 z-50 flex flex-col gap-2">
+           <Button 
+             variant={editMode ? "destructive" : "default"}
+             onClick={() => setEditMode(!editMode)}
+             className="shadow-xl"
+           >
+             {editMode ? "Disable Edit Mode" : "Enable Edit Mode"}
+           </Button>
+        </div>
+      )}
 
       {/* --- HERO SECTION --- */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -82,7 +118,21 @@ const Home = () => {
                </Button>
              </div>
 
-             {/* Edit button removed */}
+             {editMode && (
+              <Button 
+                variant="secondary" 
+                size="sm" 
+                className="mt-6 gap-2"
+                onClick={() => handleEdit('hero', hero, [
+                  { name: 'title', label: 'Title', type: 'text' },
+                  { name: 'subtitle', label: 'Subtitle', type: 'text' },
+                  { name: 'buttonText', label: 'Button Text', type: 'text' },
+                  { name: 'backgroundImage', label: 'Background Image', type: 'image' }
+                ])}
+              >
+                <Edit3 className="w-4 h-4" /> Edit Hero
+              </Button>
+             )}
           </div>
         </div>
 
@@ -135,7 +185,18 @@ const Home = () => {
                 </div>
               ))}
 
-              {/* Edit stats removed */}
+              {editMode && (
+                <div className="absolute top-0 right-0">
+                  <Button size="sm" onClick={() => handleEdit('stats', { stats }, [
+                    { 
+                      name: 'stats', label: 'Stats', type: 'array', 
+                      subFields: [ { name: 'value', placeholder: '100' }, { name: 'label', placeholder: 'Projects' } ]
+                    }
+                  ])}>
+                    <Edit3 className="w-4 h-4 mr-2" /> Edit Stats
+                  </Button>
+                </div>
+              )}
            </div>
         </div>
       </section>
@@ -183,7 +244,21 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Edit Company Info removed */}
+          {editMode && (
+             <div className="mt-8 text-center">
+                <Button onClick={() => handleEdit('companyInfo', companyInfo, [
+                  { name: 'brandName', label: 'Brand' },
+                  { name: 'companyName', label: 'Company Name' },
+                  { name: 'description', label: 'Description', type: 'textarea' },
+                  { name: 'image', label: 'Image URL', type: 'image' },
+                  { name: 'buttonText', label: 'Button Text' },
+                  { name: 'badgeValue', label: 'Badge Value (e.g. 25+)' },
+                  { name: 'badgeLabel', label: 'Badge Label' }
+                ])} variant="secondary">
+                  <Edit3 className="w-4 h-4 mr-2" /> Edit Company Section
+                </Button>
+             </div>
+          )}
         </div>
       </section>
 
@@ -197,7 +272,17 @@ const Home = () => {
                {features.linkText} <ChevronRight className="w-4 h-4" />
              </Link>
              
-             {/* Edit Features removed */}
+             {editMode && (
+               <div className="absolute top-0 right-0">
+                 <Button size="sm" variant="ghost" onClick={() => handleEdit('features', features, [
+                   { name: 'title', label: 'Section Title' },
+                   { name: 'linkText', label: 'Link Text' },
+                   { name: 'cards', label: 'Cards', type: 'array', subFields: [ { name: 'title' }, { name: 'description' } ] }
+                 ])}>
+                   <Edit3 className="w-4 h-4" />
+                 </Button>
+               </div>
+             )}
            </div>
 
            <div className="grid md:grid-cols-3 gap-8">
@@ -240,12 +325,31 @@ const Home = () => {
               </Button>
             </div>
 
-            {/* Edit CTA removed */}
+            {editMode && (
+              <div className="mt-8">
+                <Button variant="secondary" onClick={() => handleEdit('cta', cta, [
+                  { name: 'title', label: 'Title' },
+                  { name: 'description', label: 'Description', type: 'textarea' },
+                  { name: 'buttonText', label: 'Button Text' }
+                ])}>
+                  <Edit3 className="w-4 h-4 mr-2" /> Edit CTA
+                </Button>
+              </div>
+            )}
         </div>
       </section>
 
       {/* --- EDIT MODAL WRAPPER --- */}
-      {/* Edit wrapper removed */}
+      {editingSection && modalData && (
+        <EditModal
+          isOpen={true}
+          onClose={() => { setEditingSection(null); setModalData(null); }}
+          onSave={handleSave}
+          title={`Edit ${editingSection}`}
+          fields={modalData.fields}
+          initialData={modalData.data}
+        />
+      )}
     </main>
   );
 };

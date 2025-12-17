@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Edit2, ChevronDown } from 'lucide-react';
-// Auth and Edit imports removed
+import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
+import EditModal from './EditModal';
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef(null);
-  // Auth hook removed
+  const { isAdmin, token, logout } = useAuth();
   const location = useLocation();
   const [headerData, setHeaderData] = useState({
     logo: '/logo.jpeg',
@@ -16,7 +18,7 @@ const Navbar = () => {
     phone: '+91 8200 417 508',
     quoteButtonText: 'GET A QUOTE'
   });
-  // isEditing state removed
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     fetchHeaderData();
@@ -38,7 +40,16 @@ const Navbar = () => {
     }
   };
 
-  // handleSave removed
+  const handleSave = async (updatedData) => {
+    try {
+      await api.updateLayoutData({ header: updatedData }, token);
+      setHeaderData(updatedData);
+      setIsEditing(false);
+    } catch (err) {
+      console.error('Error updating header:', err);
+      alert('Failed to update header');
+    }
+  };
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -164,7 +175,27 @@ const Navbar = () => {
                 <Link to="/quote">{headerData.quoteButtonText}</Link>
               </Button>
 
-              {/* Admin controls removed */}
+              {isAdmin && (
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => setIsEditing(true)}
+                    className="rounded-full hover:bg-secondary"
+                    title="Edit Header"
+                  >
+                    <Edit2 className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={logout}
+                    className="shadow-md"
+                  >
+                    Logout
+                  </Button>
+                </>
+              )}
             </div>
 
             {/* Mobile Toggle */}
@@ -217,14 +248,32 @@ const Navbar = () => {
                   <Link to="/quote" onClick={() => setMenuOpen(false)}>{headerData.quoteButtonText}</Link>
                 </Button>
                 
-                {/* Mobile Admin controls removed */}
+                {isAdmin && (
+                  <Button variant="destructive" className="w-full mt-2" onClick={() => { logout(); setMenuOpen(false); }}>
+                    Logout
+                  </Button>
+                )}
               </div>
             </div>
           )}
         </div>
       </header>
 
-      {/* EditModal removed */}
+      {isEditing && (
+        <EditModal
+          isOpen={isEditing}
+          onClose={() => setIsEditing(false)}
+          onSave={handleSave}
+          title="Edit Header"
+          initialData={headerData}
+          fields={[
+            { name: 'logo', label: 'Logo URL', type: 'image' },
+            { name: 'brandName', label: 'Brand Name', type: 'text' },
+            { name: 'phone', label: 'Phone Number', type: 'text' },
+            { name: 'quoteButtonText', label: 'Quote Button Text', type: 'text' }
+          ]}
+        />
+      )}
     </>
   );
 };
