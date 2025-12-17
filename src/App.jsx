@@ -19,7 +19,7 @@ import Career from './components/Career';
 import Quote from './components/Quote';
 import Workforce from './components/Workforce';
 import Feedback from './components/Feedback';
-import AdminLogin from './components/AdminLogin';
+// import AdminLogin from './components/AdminLogin';
 import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
@@ -36,7 +36,7 @@ const App = () => {
         <div className="flex-1 app-content pt-20 pb-32">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<AdminLogin />} />
+            
             <Route path="/about" element={<About />} />
             <Route path="/mission" element={<Mission />} />
             <Route path="/management" element={<Management />} />
