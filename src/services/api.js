@@ -1,4 +1,17 @@
-import staticData from '../data/staticData.json';
+import homepageData from '../data/homepage.json';
+import aboutpageData from '../data/aboutpage.json';
+import missionpageData from '../data/missionpage.json';
+import managementpageData from '../data/managementpage.json';
+import gallerypageData from '../data/gallerypage.json';
+import servicepageData from '../data/servicepage.json';
+import projectpageData from '../data/projectpage.json';
+import resourcespageData from '../data/resourcespage.json';
+import workforcepageData from '../data/workforcepage.json';
+import layoutData from '../data/layout.json';
+import ehspageData from '../data/ehspage.json';
+import certificatepageData from '../data/certificatepage.json';
+import contactpageData from '../data/contactpage.json';
+import careerpageData from '../data/careerpage.json';
 
 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
@@ -27,7 +40,7 @@ const api = {
     // Home Page
     getHomePageData: async () => {
         await delay(200);
-        return staticData.homepage;
+        return homepageData;
     },
 
     updateHomePageData: async (updateData, token) => {
@@ -41,7 +54,7 @@ const api = {
     // About Page API
     getAboutPageData: async () => {
         await delay(200);
-        return staticData.aboutpage;
+        return aboutpageData;
     },
 
     updateAboutPageData: async (updateData, token) => {
@@ -53,7 +66,7 @@ const api = {
     // Mission Page API
     getMissionPageData: async () => {
         await delay(200);
-        return staticData.missionpage;
+        return missionpageData;
     },
 
     updateMissionPageData: async (updateData, token) => {
@@ -65,7 +78,7 @@ const api = {
     // Management Page API
     getManagementPageData: async () => {
         await delay(200);
-        return staticData.managementpage;
+        return managementpageData;
     },
 
     updateManagementPageData: async (updateData, token) => {
@@ -77,7 +90,7 @@ const api = {
     // Gallery Page API
     getGalleryPageData: async () => {
         await delay(200);
-        return staticData.gallerypage;
+        return gallerypageData;
     },
 
     updateGalleryPageData: async (updateData, token) => {
@@ -89,7 +102,7 @@ const api = {
     // Service Page API
     getServicePageData: async () => {
         await delay(200);
-        return staticData.servicepage;
+        return servicepageData;
     },
 
     updateServicePageData: async (updateData, token) => {
@@ -101,7 +114,7 @@ const api = {
     // Project Page API
     getProjectPageData: async () => {
         await delay(200);
-        return staticData.projectpage;
+        return projectpageData;
     },
 
     updateProjectPageData: async (updateData, token) => {
@@ -113,7 +126,7 @@ const api = {
     // Resources Page
     getResourcesPageData: async () => {
         await delay(200);
-        return staticData.resourcespage;
+        return resourcespageData;
     },
 
     updateResourcesPageData: async (data, token) => {
@@ -125,7 +138,7 @@ const api = {
     // Workforce Page
     getWorkforcePageData: async () => {
         await delay(200);
-        return staticData.workforcepage;
+        return workforcepageData;
     },
 
     updateWorkforcePageData: async (data, token) => {
@@ -149,7 +162,7 @@ const api = {
     // Layout (Header/Footer)
     getLayoutData: async () => {
         await delay(200);
-        return staticData.layout;
+        return layoutData;
     },
 
     updateLayoutData: async (data, token) => {
@@ -161,7 +174,7 @@ const api = {
     // EHS Page API
     getEHSPageData: async () => {
         await delay(200);
-        return staticData.ehspage;
+        return ehspageData;
     },
 
     updateEHSPageData: async (updateData, token) => {
@@ -173,7 +186,7 @@ const api = {
     // Certificate Page API
     getCertificatePageData: async () => {
         await delay(200);
-        return staticData.certificatepage;
+        return certificatepageData;
     },
 
     updateCertificatePageData: async (updateData, token) => {
@@ -185,7 +198,7 @@ const api = {
     // Contact Page API
     getContactPageData: async () => {
         await delay(200);
-        return staticData.contactpage;
+        return contactpageData;
     },
 
     updateContactPageData: async (data, token) => {
@@ -197,7 +210,7 @@ const api = {
     // Career Page API
     getCareerPageData: async () => {
         await delay(200);
-        return staticData.careerpage;
+        return careerpageData;
     },
 
     updateCareerPageData: async (data, token) => {
