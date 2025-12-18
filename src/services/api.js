@@ -18,6 +18,29 @@ const isLocal = window.location.hostname === 'localhost' || window.location.host
 // Helper to simulate async delay
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+// Helper to recursively append timestamp to image URLs
+const bustCache = (data) => {
+    if (Array.isArray(data)) {
+        return data.map(item => bustCache(item));
+    } else if (typeof data === 'object' && data !== null) {
+        const newData = {};
+        for (const key in data) {
+            newData[key] = bustCache(data[key]);
+        }
+        return newData;
+    } else if (typeof data === 'string') {
+        // Check if string is an image path
+        if (data.match(/\.(jpg|jpeg|png|gif|webp|svg|mp4)$/i)) {
+             // Check if it's a local path (starts with / or ./ or just a filename) and not a full URL or blob
+             if (!data.startsWith('http') && !data.startsWith('blob:') && !data.startsWith('data:')) {
+                 return `${data}?v=${new Date().getTime()}`;
+             }
+        }
+        return data;
+    }
+    return data;
+};
+
 const api = {
     // Authentication - Mock implementation
     login: async (username, password) => {
@@ -40,7 +63,7 @@ const api = {
     // Home Page
     getHomePageData: async () => {
         await delay(200);
-        return homepageData;
+        return bustCache(homepageData);
     },
 
     updateHomePageData: async (updateData, token) => {
@@ -54,7 +77,7 @@ const api = {
     // About Page API
     getAboutPageData: async () => {
         await delay(200);
-        return aboutpageData;
+        return bustCache(aboutpageData);
     },
 
     updateAboutPageData: async (updateData, token) => {
@@ -66,7 +89,7 @@ const api = {
     // Mission Page API
     getMissionPageData: async () => {
         await delay(200);
-        return missionpageData;
+        return bustCache(missionpageData);
     },
 
     updateMissionPageData: async (updateData, token) => {
@@ -78,7 +101,7 @@ const api = {
     // Management Page API
     getManagementPageData: async () => {
         await delay(200);
-        return managementpageData;
+        return bustCache(managementpageData);
     },
 
     updateManagementPageData: async (updateData, token) => {
@@ -90,7 +113,7 @@ const api = {
     // Gallery Page API
     getGalleryPageData: async () => {
         await delay(200);
-        return gallerypageData;
+        return bustCache(gallerypageData);
     },
 
     updateGalleryPageData: async (updateData, token) => {
@@ -102,7 +125,7 @@ const api = {
     // Service Page API
     getServicePageData: async () => {
         await delay(200);
-        return servicepageData;
+        return bustCache(servicepageData);
     },
 
     updateServicePageData: async (updateData, token) => {
@@ -114,7 +137,7 @@ const api = {
     // Project Page API
     getProjectPageData: async () => {
         await delay(200);
-        return projectpageData;
+        return bustCache(projectpageData);
     },
 
     updateProjectPageData: async (updateData, token) => {
@@ -126,7 +149,7 @@ const api = {
     // Resources Page
     getResourcesPageData: async () => {
         await delay(200);
-        return resourcespageData;
+        return bustCache(resourcespageData);
     },
 
     updateResourcesPageData: async (data, token) => {
@@ -138,7 +161,7 @@ const api = {
     // Workforce Page
     getWorkforcePageData: async () => {
         await delay(200);
-        return workforcepageData;
+        return bustCache(workforcepageData);
     },
 
     updateWorkforcePageData: async (data, token) => {
@@ -162,7 +185,7 @@ const api = {
     // Layout (Header/Footer)
     getLayoutData: async () => {
         await delay(200);
-        return layoutData;
+        return bustCache(layoutData);
     },
 
     updateLayoutData: async (data, token) => {
@@ -174,7 +197,7 @@ const api = {
     // EHS Page API
     getEHSPageData: async () => {
         await delay(200);
-        return ehspageData;
+        return bustCache(ehspageData);
     },
 
     updateEHSPageData: async (updateData, token) => {
@@ -186,7 +209,7 @@ const api = {
     // Certificate Page API
     getCertificatePageData: async () => {
         await delay(200);
-        return certificatepageData;
+        return bustCache(certificatepageData);
     },
 
     updateCertificatePageData: async (updateData, token) => {
@@ -198,7 +221,7 @@ const api = {
     // Contact Page API
     getContactPageData: async () => {
         await delay(200);
-        return contactpageData;
+        return bustCache(contactpageData);
     },
 
     updateContactPageData: async (data, token) => {
@@ -210,7 +233,7 @@ const api = {
     // Career Page API
     getCareerPageData: async () => {
         await delay(200);
-        return careerpageData;
+        return bustCache(careerpageData);
     },
 
     updateCareerPageData: async (data, token) => {
