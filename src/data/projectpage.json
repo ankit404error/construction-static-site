@@ -1,0 +1,140 @@
+{
+  "_id": "692eecd1a6fe3ac31e8133d0",
+  "projects": [
+    {
+      "image": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037992/construction-cms/file.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "Rungta Mines Ltd.",
+      "year": "2024",
+      "title": "1×40 MW STG Overhauling, Rungta Mines",
+      "nature": "Mechanical Erection Works at WFGD",
+      "progress": null,
+      "status": "running",
+      "_id": "693b09fbf756c4599f4d7e68"
+    },
+    {
+      "image": "/proj2.jpg",
+      "company": "JINDAL SAW LTD.",
+      "client": "Jindal Saw Ltd.",
+      "year": "2024",
+      "title": "E&C 25.75 MW TG, Jindal Saw Limited, Mundra",
+      "nature": "Erection & Commissioning of 31.2 MW STG & its Auxiliaries",
+      "progress": 90,
+      "status": "running",
+      "_id": "693b09fbf756c4599f4d7e69"
+    },
+    {
+      "image": "/proj3.jpg",
+      "company": "APOLLO INTERNATIONAL LIMITED",
+      "client": "Hindustan Powerprojects Private Ltd.",
+      "year": "2023",
+      "title": "FGD of 2×600 MW Anuppur Thermal Power Plant, Jaithari, Anuppur, Madhya Pradesh.",
+      "nature": "Mechanical Erection Works at WFGD",
+      "progress": 60,
+      "status": "running",
+      "_id": "693b09fbf756c4599f4d7e6a"
+    },
+    {
+      "image": "/proj4.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "Shyam Steel Manufacturing Ltd.",
+      "year": "1970",
+      "title": "1×21.5 MW Shyam Steel Manufacturing Limited, Jemua Mouza, Mejia",
+      "nature": "Replacement of 15 MW to 20 MW STG & its Auxiliaries",
+      "progress": 0,
+      "status": "completed",
+      "_id": "693b09fbf756c4599f4d7e6b"
+    },
+    {
+      "image": "/proj5.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "Khanna Paper Mill, Amritsar",
+      "year": "1970",
+      "title": "1×23.2 MW Khanna Paper Mills, Amritsar, Punjab",
+      "nature": "Replacement of 15 MW to 23 MW STG & its Auxiliaries",
+      "progress": 0,
+      "status": "completed",
+      "_id": "693b09fbf756c4599f4d7e6c"
+    },
+    {
+      "image": "/proj6.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "NSL Sugars Limited, Majalgaon, Maharashtra",
+      "year": "1970",
+      "title": "1×31.2 MW STG E&C, Radha Krishna Manufacturing & Industries Pvt. Ltd. – NSL Sugar",
+      "nature": "Erection & Commissioning of 31.2 MW STG & its Auxiliaries",
+      "progress": 0,
+      "status": "completed",
+      "_id": "693b09fbf756c4599f4d7e6d"
+    },
+    {
+      "image": "/proj1.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "Rungta Mines Ltd.",
+      "year": "2024",
+      "title": "1×40 MW STG Overhauling, Rungta Mines 2",
+      "nature": "Mechanical Erection Works at WFGD",
+      "progress": 30,
+      "status": "running",
+      "_id": "693b09fbf756c4599f4d7e6e"
+    },
+    {
+      "image": "/proj2.jpg",
+      "company": "JINDAL SAW LTD.",
+      "client": "Jindal Saw Ltd.",
+      "year": "2024",
+      "title": "E&C 25.75 MW TG, Jindal Saw Limited, Mundra 2",
+      "nature": "Erection & Commissioning of 31.2 MW STG & its Auxiliaries",
+      "progress": 50,
+      "status": "running",
+      "_id": "693b09fbf756c4599f4d7e6f"
+    },
+    {
+      "image": "/proj3.jpg",
+      "company": "APOLLO INTERNATIONAL LIMITED",
+      "client": "Hindustan Powerprojects Private Ltd.",
+      "year": "2023",
+      "title": "FGD of 2×600 MW Anuppur Thermal Power Plant, Jaithari, Anuppur, Madhya Pradesh 2.",
+      "nature": "Mechanical Erection Works at WFGD",
+      "progress": 88,
+      "status": "running",
+      "_id": "693b09fbf756c4599f4d7e70"
+    },
+    {
+      "image": "/proj4.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "Shyam Steel Manufacturing Ltd.",
+      "year": "1970",
+      "title": "1×21.5 MW Shyam Steel Manufacturing Limited, Jemua Mouza, Mejia 2",
+      "nature": "Replacement of 15 MW to 20 MW STG & its Auxiliaries",
+      "progress": 0,
+      "status": "completed",
+      "_id": "693b09fbf756c4599f4d7e71"
+    },
+    {
+      "image": "/proj5.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "Khanna Paper Mill, Amritsar",
+      "year": "1970",
+      "title": "1×23.2 MW Khanna Paper Mills, Amritsar, Punjab 2",
+      "nature": "Replacement of 15 MW to 23 MW STG & its Auxiliaries",
+      "progress": 0,
+      "status": "completed",
+      "_id": "693b09fbf756c4599f4d7e72"
+    },
+    {
+      "image": "/proj6.jpg",
+      "company": "SIEMENS LTD.",
+      "client": "NSL Sugars Limited, Majalgaon, Maharashtra",
+      "year": "1970",
+      "title": "1×31.2 MW STG E&C, Radha Krishna Manufacturing & Industries Pvt. Ltd. – NSL Sugar 2",
+      "nature": "Erection & Commissioning of 31.2 MW STG & its Auxiliaries",
+      "progress": 0,
+      "status": "completed",
+      "_id": "693b09fbf756c4599f4d7e73"
+    }
+  ],
+  "createdAt": "2025-12-02T13:42:41.240Z",
+  "updatedAt": "2025-12-18T06:08:45.026Z",
+  "__v": 32
+}

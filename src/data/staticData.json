@@ -31,7 +31,7 @@
         ]
       },
       "companyInfo": {
-        "logo": "https://act-kundal-frontend.vercel.app/logo.jpeg",
+        "logo": "/logo.jpeg",
         "brandName": "KUNAL™",
         "companyName": "Kunal Global Fabtech Pvt. Ltd.",
         "description": "KGFPL, led by Mr. Sanjay Singh & Mr. Mahendra Singh, excels in technical and financial administration. We have specialization in mechanical installation and commissioning for the various refinery and power projects to the development of a new India.",

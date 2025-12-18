@@ -1,0 +1,55 @@
+{
+  "cta": {
+    "title": "So, What are You Waiting For? Let's Talk About Your Project!",
+    "description": "Get in touch with us, share your aspirations, and watch as together we craft a journey where your dreams truly take flight.",
+    "buttonText": "START YOUR PROJECT"
+  },
+  "_id": "692eeccfc7fcd5f73cb373c3",
+  "services": [
+    {
+      "title": "FGD (Flue Gas Desulfurization)",
+      "desc": "Proficient in the installation and commissioning of FGD systems for emission control.",
+      "image": "/image10.jpg",
+      "_id": "692f1aedaea082926dd688e0"
+    },
+    {
+      "title": "Fabrication and Erection Structure",
+      "desc": "Specializing in precision fabrication and on-site erection of structural steel for diverse applications.",
+      "image": "/image11.jpg",
+      "_id": "692f1aedaea082926dd688e1"
+    },
+    {
+      "title": "Piping Work (NIBR, IBR, FRP)",
+      "desc": "Skilled in executing high-quality NIBR, IBR, and FRP piping systems with full regulatory compliance.",
+      "image": "/image12.jpg",
+      "_id": "692f1aedaea082926dd688e2"
+    },
+    {
+      "title": "Pipe Rack Structure",
+      "desc": "Expert in designing, fabricating, and erecting robust pipe rack structures for industrial projects.",
+      "image": "/image13.jpg",
+      "_id": "692f1aedaea082926dd688e3"
+    },
+    {
+      "title": "STG Turbine",
+      "desc": "Experienced in installation, alignment, and commissioning of Steam Turbine Generators (STG).",
+      "image": "/image14.jpg",
+      "_id": "692f1aedaea082926dd688e4"
+    },
+    {
+      "title": "Solar",
+      "desc": "Delivering turnkey solar power solutions from panel installation to grid integration.",
+      "image": "/image15.jpg",
+      "_id": "692f1aedaea082926dd688e5"
+    },
+    {
+      "title": "Electrical Work with Commissioning",
+      "desc": "Comprehensive electrical system execution including wiring, panel setup, and commissioning.",
+      "image": "/image16.png",
+      "_id": "692f1aedaea082926dd688e6"
+    }
+  ],
+  "createdAt": "2025-12-02T13:42:39.692Z",
+  "updatedAt": "2025-12-02T16:59:25.632Z",
+  "__v": 2
+}

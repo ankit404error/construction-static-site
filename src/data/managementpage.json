@@ -1,0 +1,57 @@
+{
+  "cta": {
+    "title": "Be a Part of Kunal Global Fabtech Pvt. Ltd.",
+    "description": "Join our dynamic team of professionals and contribute to building the future of industrial excellence. We offer exciting career opportunities for talented individuals who share our vision of innovation and quality.",
+    "buttonText": "JOIN OUR TEAM"
+  },
+  "_id": "692eeb27bad0c1cdec26e043",
+  "managementTeam": [
+    {
+      "name": "Mr. Sanjay Singh",
+      "title": "Managing Director",
+      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037783/construction-cms/file.jpg",
+      "_id": "692f1ae5a11778b5c9ea5f4b"
+    },
+    {
+      "name": "Mahendra Singh",
+      "title": "Director",
+      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037759/construction-cms/file.jpg",
+      "_id": "693af14b8820b3581d790a5e"
+    }
+  ],
+  "leadershipTeam": [
+    {
+      "name": "Mr. Manzer Hussain",
+      "title": "Chief Operating Officer",
+      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037816/construction-cms/file.jpg",
+      "_id": "692f1ae5a11778b5c9ea5f4c"
+    },
+    {
+      "name": "Mr. Vijay Bahadur Jhabbar",
+      "title": "General Manager-HRD",
+      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037926/construction-cms/file.jpg",
+      "_id": "692f1ae5a11778b5c9ea5f4d"
+    },
+    {
+      "name": "Mr. Ashutosh Shukla",
+      "title": "General Manager - Projects",
+      "img": "/image44.jpeg",
+      "_id": "692f1ae5a11778b5c9ea5f4e"
+    },
+    {
+      "name": "Mr. Subhash Kumar",
+      "title": "Executive - Planning & Co-ordination",
+      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037862/construction-cms/file.jpg",
+      "_id": "692f1ae5a11778b5c9ea5f4f"
+    },
+    {
+      "name": "Mr. Shailendra Kr. Sachan",
+      "title": "General Manager - Projects",
+      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037628/construction-cms/file.jpg",
+      "_id": "692f1ae5a11778b5c9ea5f50"
+    }
+  ],
+  "createdAt": "2025-12-02T13:35:35.731Z",
+  "updatedAt": "2025-12-18T06:05:30.801Z",
+  "__v": 20
+}

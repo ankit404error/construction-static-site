@@ -1,0 +1,175 @@
+{
+  "cta": {
+    "title": "So, What are You Waiting For?\nLet’s Talk About Your Project!",
+    "subtitle": "Get in touch with us, share your aspirations, and watch as together we craft a journey where your dreams truly take flight.",
+    "buttonText": "START YOUR PROJECT",
+    "buttonLink": "/contact"
+  },
+  "_id": "692ef67749085d7e9b5130cd",
+  "items": [
+    {
+      "name": "Aluminium Ladder assorted type",
+      "type": "TOOL",
+      "quantity": 535,
+      "image": "/image17.png",
+      "_id": "692f1aebd2698e3bf0e2d1cf"
+    },
+    {
+      "name": "Scaffolding Planks",
+      "type": "TOOL",
+      "quantity": 18570,
+      "image": "/image18.png",
+      "_id": "692f1aebd2698e3bf0e2d1d0"
+    },
+    {
+      "name": "Scaffolding Vertical & Ledger",
+      "type": "TOOL",
+      "quantity": 16313,
+      "image": "/image19.png",
+      "_id": "692f1aebd2698e3bf0e2d1d1"
+    },
+    {
+      "name": "Scaffolding Clamp assorted type",
+      "type": "TOOL",
+      "quantity": 113444,
+      "image": "/image20.png",
+      "_id": "692f1aebd2698e3bf0e2d1d2"
+    },
+    {
+      "name": "Scaffolding Pipe",
+      "type": "EQUIPMENT",
+      "quantity": 84083,
+      "image": "/image21.png",
+      "_id": "692f1aebd2698e3bf0e2d1d3"
+    },
+    {
+      "name": "Chain Pulley Block 5t - 10t",
+      "type": "TOOL",
+      "quantity": 150,
+      "image": "/image22.png",
+      "_id": "692f1aebd2698e3bf0e2d1d4"
+    },
+    {
+      "name": "Dshackle",
+      "type": "TOOL",
+      "quantity": 280,
+      "image": "/image23.png",
+      "_id": "692f1aebd2698e3bf0e2d1d5"
+    },
+    {
+      "name": "Wire Rope Sling 52mm & 80mm",
+      "type": "TOOL",
+      "quantity": 12,
+      "image": "/image24.png",
+      "_id": "692f1aebd2698e3bf0e2d1d6"
+    },
+    {
+      "name": "Magnetic Base Drill M/c",
+      "type": "TOOL",
+      "quantity": 15,
+      "image": "/image25.png",
+      "_id": "692f1aebd2698e3bf0e2d1d7"
+    },
+    {
+      "name": "Hydraulic Press",
+      "type": "TOOL",
+      "quantity": 1,
+      "image": "/image26.png",
+      "_id": "692f1aebd2698e3bf0e2d1d8"
+    },
+    {
+      "name": "Plate Bending Machine",
+      "type": "TOOL",
+      "quantity": 3,
+      "image": "/image27.png",
+      "_id": "692f1aebd2698e3bf0e2d1d9"
+    },
+    {
+      "name": "Compressor 13 CFM",
+      "type": "TOOL",
+      "quantity": 6,
+      "image": "/image28.png",
+      "_id": "692f1aebd2698e3bf0e2d1da"
+    },
+    {
+      "name": "Auto Beveling Machine",
+      "type": "TOOL",
+      "quantity": 1,
+      "image": "/image29.png",
+      "_id": "692f1aebd2698e3bf0e2d1db"
+    },
+    {
+      "name": "Plasma Cutting Machine",
+      "type": "TOOL",
+      "quantity": 7,
+      "image": "/image30.png",
+      "_id": "692f1aebd2698e3bf0e2d1dc"
+    },
+    {
+      "name": "Welding Machine",
+      "type": "TOOL",
+      "quantity": 144,
+      "image": "/image31.png",
+      "_id": "692f1aebd2698e3bf0e2d1dd"
+    },
+    {
+      "name": "Power Pack 7.5 HP",
+      "type": "TOOL",
+      "quantity": 1,
+      "image": "/image32.png",
+      "_id": "692f1aebd2698e3bf0e2d1de"
+    },
+    {
+      "name": "Vertical Hydraulic Jack 12t",
+      "type": "TOOL",
+      "quantity": 13,
+      "image": "/image33.png",
+      "_id": "692f1aebd2698e3bf0e2d1df"
+    },
+    {
+      "name": "Power Pack 20 HP",
+      "type": "TOOL",
+      "quantity": 2,
+      "image": "/image34.png",
+      "_id": "692f1aebd2698e3bf0e2d1e0"
+    },
+    {
+      "name": "Vertical Hydraulic Jack 25t",
+      "type": "TOOL",
+      "quantity": 60,
+      "image": "/image35.png",
+      "_id": "692f1aebd2698e3bf0e2d1e1"
+    },
+    {
+      "name": "Farana F15",
+      "type": "TOOL",
+      "quantity": 2,
+      "image": "/image36.png",
+      "_id": "692f1aebd2698e3bf0e2d1e2"
+    },
+    {
+      "name": "FARANA F-20",
+      "type": "TOOL",
+      "quantity": 2,
+      "image": "/image37.png",
+      "_id": "692f1aebd2698e3bf0e2d1e3"
+    },
+    {
+      "name": "FARANA F-17",
+      "type": "TOOL",
+      "quantity": 3,
+      "image": "/image38.png",
+      "_id": "692f1aebd2698e3bf0e2d1e4"
+    },
+    {
+      "name": "Office Container",
+      "type": "EQUIPMENT",
+      "quantity": 12,
+      "image": "/image39.png",
+      "_id": "692f1aebd2698e3bf0e2d1e5"
+    }
+  ],
+  "createdAt": "2025-12-02T14:23:51.821Z",
+  "updatedAt": "2025-12-02T16:59:23.476Z",
+  "__v": 3
+}
