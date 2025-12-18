@@ -9,13 +9,13 @@
     {
       "name": "Mr. Sanjay Singh",
       "title": "Managing Director",
-      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037783/construction-cms/file.jpg",
+      "img": "sanjay-singh.jpg",
       "_id": "692f1ae5a11778b5c9ea5f4b"
     },
     {
       "name": "Mahendra Singh",
       "title": "Director",
-      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037759/construction-cms/file.jpg",
+      "img": "mahendra-singh.jpg",
       "_id": "693af14b8820b3581d790a5e"
     }
   ],
@@ -23,13 +23,13 @@
     {
       "name": "Mr. Manzer Hussain",
       "title": "Chief Operating Officer",
-      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037816/construction-cms/file.jpg",
+      "img": "manzer.jpg",
       "_id": "692f1ae5a11778b5c9ea5f4c"
     },
     {
       "name": "Mr. Vijay Bahadur Jhabbar",
       "title": "General Manager-HRD",
-      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037926/construction-cms/file.jpg",
+      "img": "vijay.jpg",
       "_id": "692f1ae5a11778b5c9ea5f4d"
     },
     {
@@ -41,13 +41,13 @@
     {
       "name": "Mr. Subhash Kumar",
       "title": "Executive - Planning & Co-ordination",
-      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037862/construction-cms/file.jpg",
+      "img": "Subhash.jpg",
       "_id": "692f1ae5a11778b5c9ea5f4f"
     },
     {
       "name": "Mr. Shailendra Kr. Sachan",
       "title": "General Manager - Projects",
-      "img": "https://res.cloudinary.com/dro6f1fhh/image/upload/v1766037628/construction-cms/file.jpg",
+      "img": "shailenndra.jpg",
       "_id": "692f1ae5a11778b5c9ea5f50"
     }
   ],
